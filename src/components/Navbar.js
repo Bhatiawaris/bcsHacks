@@ -7,7 +7,7 @@ function Navbar() {
     <Flex p={4} backgroundColor="teal" alignItems="center">
       <Link to="/">
         <Text fontSize="xl" fontWeight="bold" color="white">
-          Placeholder App Name
+          Habit Builder
         </Text>
       </Link>
       <Spacer />
