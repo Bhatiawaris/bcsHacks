@@ -27,8 +27,8 @@ function PromptPage() {
     });
 
     if (response.ok) {
-      const data = await response.json(); // Parse response body as JSON
-      setProcessedOutput(data.output); // Update state with processed output
+      const data = await response.json();
+      setProcessedOutput(data.output);
       console.log("Response Successful");
     } else {
       console.log("Response Failed");
