@@ -1,29 +1,33 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
 
 function PlanPage({ detailedPlan }) {
+  //parse detailedPlan first
+  const [parsedPlan, setParsedPlan] = React.useState([]);
+
+  if (detailedPlan) {
+  }
+
   return (
-    <Box backgroundColor="#1A202C" minHeight="100vh" maxWidth="100%">
-      <Box backgroundColor="#253140" borderRadius="10px" padding="20px">
-        {detailedPlan.map((item, index) =>
-          item.description ? (
-            <Box
-              key={index}
-              width="50%"
-              height="auto"
-              borderRadius="10px"
-              backgroundColor="teal"
-              color="white"
-              padding="10px"
-              margin="1rem"
-              whiteSpace="normal"
-            >
-              <Text fontSize="l">{item.description}</Text>
-            </Box>
-          ) : null
-        )}
-      </Box>
-    </Box>
+    <Flex wrap="wrap">
+      {detailedPlan.map((item, index) =>
+        item.description ? (
+          <Box
+            key={index}
+            width="100%"
+            height="auto"
+            borderRadius="10px"
+            backgroundColor="teal"
+            color="white"
+            padding="10px"
+            margin="1rem"
+            whiteSpace="normal"
+          >
+            <Text fontSize="l">{item.description}</Text>
+          </Box>
+        ) : null
+      )}
+    </Flex>
   );
 }
 

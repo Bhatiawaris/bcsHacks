@@ -61,7 +61,7 @@ function PromptPage() {
       if (response.ok) {
         const data = await response.json();
         console.log("Selected habits submitted successfully!");
-        // console.log("Detailed plan: ", data.output);
+        console.log("Detailed plan: ", data.output);
         setDetailedPlan(data.output);
       } else {
         console.log("Failed to submit selected habits.");
@@ -71,8 +71,36 @@ function PromptPage() {
     }
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   if (detailedPlan.length > 0) {
-    return <PlanPage detailedPlan={detailedPlan} />;
+    return (
+      <Grid
+        templateColumns="repeat(2, 1fr)"
+        gap={6}
+        backgroundColor="#1A202C"
+        color="white"
+        p={5}
+        minHeight="100vh"
+        maxWidth="100%"
+      >
+        <Box padding="20px">
+          <Text fontSize="xl" fontWeight="bold" mb={4}>
+            Your detailed plan is available!
+          </Text>
+          <Box width="20px" />
+          <Button onClick={refreshPage} colorScheme="teal">
+            Make a new plan
+          </Button>
+        </Box>
+
+        <Box backgroundColor="#253140" borderRadius="10px" padding="20px">
+          <PlanPage detailedPlan={detailedPlan} />
+        </Box>
+      </Grid>
+    );
   }
 
   return (

@@ -1,4 +1,4 @@
-import { Text, Box, Button, Spinner } from "@chakra-ui/react";
+import { Text, Box, Button, Spinner, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
 const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
@@ -56,7 +56,7 @@ const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
             Choose up to 4 preferred habits to add to your plan, then submit to
             get extra details on each.
           </Text>
-          <Box display="flex" flexWrap="wrap">
+          <Flex wrap="wrap">
             {habits.map((habit, index) => (
               <Button
                 key={index}
@@ -98,7 +98,7 @@ const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
                 </Text>
               </Button>
             ))}
-          </Box>
+          </Flex>
           {habits.length > 0 && (
             <Button onClick={handleSubmit} colorScheme="teal" mt="1rem">
               Submit Selected Habits
