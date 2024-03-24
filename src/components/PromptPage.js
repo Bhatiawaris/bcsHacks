@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Box, Button, Flex, Input, Text, Grid } from "@chakra-ui/react";
+import HabitList from "./HabitList";
 
 function PromptPage() {
   const [goal, setGoal] = useState("");
   const [submittedGoal, setSubmittedGoal] = useState("");
   const [habit, setHabit] = useState("");
+  const [habits, setHabits] = useState([]);
+  const [customHabits, setCustomHabits] = useState([]);
+  const [processedOutput, setProcessedOutput] = useState("");
 
   const handleGoalChange = (event) => {
     setGoal(event.target.value);
@@ -12,22 +16,23 @@ function PromptPage() {
 
   const handleGoalSubmit = async () => {
     setSubmittedGoal(goal);
-    alert(`Goal: ${goal}`);
     setGoal("");
 
-    // const response = await fetch(`http://localhost:3000/processInput`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ field }),
-    // });
+    const response = await fetch(`http://localhost:3001/processInput`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ goal }),
+    });
 
-    // if (response.ok) {
-    //   console.log("Response Successful");
-    // } else {
-    //   console.log("Response Failed");
-    // }
+    if (response.ok) {
+      const data = await response.json(); // Parse response body as JSON
+      setProcessedOutput(data.output); // Update state with processed output
+      console.log("Response Successful");
+    } else {
+      console.log("Response Failed");
+    }
   };
 
   const handleHabitChange = (event) => {
@@ -35,7 +40,7 @@ function PromptPage() {
   };
 
   const handleHabitSubmit = async () => {
-    alert(`Habit: ${habit}`);
+    setCustomHabits([...customHabits, habit]);
     setHabit("");
   };
 
@@ -96,6 +101,8 @@ function PromptPage() {
         <Text fontSize="xl" fontWeight="bold">
           {submittedGoal}
         </Text>
+        <Text mb={2}>Processed Output: {processedOutput}</Text>
+        <HabitList habits={habits} customHabits={customHabits} />
       </Box>
     </Grid>
   );
