@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Box, Button, Flex, Input, Text, Grid } from "@chakra-ui/react";
 import HabitList from "./HabitList";
+import PlanPage from "./PlanPage";
 
 function PromptPage() {
   const [goal, setGoal] = useState("");
   const [submittedGoal, setSubmittedGoal] = useState("");
   const [habit, setHabit] = useState("");
-  const [habits, setHabits] = useState([]);
   const [customHabits, setCustomHabits] = useState([]);
-  const [processedOutput, setProcessedOutput] = useState([]);
+  const [habits, setHabits] = useState([]);
+  const [detailedPlan, setDetailedPlan] = useState([]);
 
   const handleGoalChange = (event) => {
     setGoal(event.target.value);
@@ -28,7 +29,7 @@ function PromptPage() {
 
     if (response.ok) {
       const data = await response.json();
-      setProcessedOutput(data.output);
+      setHabits(data.output);
       console.log("Response Successful");
     } else {
       console.log("Response Failed");
@@ -60,7 +61,8 @@ function PromptPage() {
       if (response.ok) {
         const data = await response.json();
         console.log("Selected habits submitted successfully!");
-        console.log("Processed Output:", data.output); //temporary solution
+        // console.log("Detailed plan: ", data.output);
+        setDetailedPlan(data.output);
       } else {
         console.log("Failed to submit selected habits.");
       }
@@ -68,6 +70,10 @@ function PromptPage() {
       console.error("Error:", error);
     }
   };
+
+  if (detailedPlan.length > 0) {
+    return <PlanPage detailedPlan={detailedPlan} />;
+  }
 
   return (
     <Grid
@@ -132,7 +138,7 @@ function PromptPage() {
         </Text>
         {submittedGoal && (
           <HabitList
-            habits={processedOutput}
+            habits={habits}
             customHabits={customHabits}
             onSubmitHabits={handleSubmitHabits}
           />

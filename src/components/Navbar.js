@@ -11,11 +11,6 @@ function Navbar() {
         </Text>
       </Link>
       <Spacer />
-      <Link to="/plan">
-        <Button colorScheme="whiteAlpha" mr={2}>
-          View your plan
-        </Button>
-      </Link>
       <Link to="/prompt">
         <Button colorScheme="whiteAlpha" mr={2}>
           Enter your goal
