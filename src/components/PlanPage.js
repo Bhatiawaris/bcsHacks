@@ -2,12 +2,6 @@ import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 function PlanPage({ detailedPlan }) {
-  //parse detailedPlan first
-  const [parsedPlan, setParsedPlan] = React.useState([]);
-
-  if (detailedPlan) {
-  }
-
   return (
     <Flex wrap="wrap">
       {detailedPlan.map((item, index) =>
