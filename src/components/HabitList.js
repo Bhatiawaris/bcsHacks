@@ -1,4 +1,4 @@
-import { Text, Box, Button } from "@chakra-ui/react";
+import { Text, Box, Button, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 
 const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
@@ -12,7 +12,9 @@ const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
         selectedHabits.filter((selectedHabit) => selectedHabit !== index)
       );
     } else {
-      setSelectedHabits([...selectedHabits, index]);
+      if (selectedHabits.length + selectedCustomHabits.length < 4) {
+        setSelectedHabits([...selectedHabits, index]);
+      }
     }
   };
 
@@ -23,7 +25,9 @@ const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
         selectedCustomHabits.filter((selectedHabit) => selectedHabit !== index)
       );
     } else {
-      setSelectedCustomHabits([...selectedCustomHabits, index]);
+      if (selectedHabits.length + selectedCustomHabits.length < 4) {
+        setSelectedCustomHabits([...selectedCustomHabits, index]);
+      }
     }
   };
 
@@ -44,50 +48,64 @@ const HabitList = ({ habits, customHabits, onSubmitHabits }) => {
 
   return (
     <Box>
-      <Box display="flex" flexWrap="wrap">
-        {habits.map((habit, index) => (
-          <Button
-            key={index}
-            width="100%"
-            height="auto"
-            borderRadius="10px"
-            colorScheme="teal"
-            color="white"
-            variant={selectedHabits.includes(index) ? "solid" : "outline"}
-            padding="10px"
-            margin="1rem"
-            _hover={{ bg: "#2D797B" }}
-            onClick={() => handleClick(index)}
-            whiteSpace="normal"
-          >
-            <Text fontSize="l">{habit.description}</Text>
-          </Button>
-        ))}
+      {habits.length === 0 ? (
+        <Spinner size="xl" color="teal" />
+      ) : (
+        <>
+          <Text fontSize="xl" fontWeight="bold" mb={4}>
+            Choose up to 4 preferred habits to add to your plan, then submit to
+            get extra details on each.
+          </Text>
+          <Box display="flex" flexWrap="wrap">
+            {habits.map((habit, index) => (
+              <Button
+                key={index}
+                width="100%"
+                height="auto"
+                borderRadius="10px"
+                colorScheme="teal"
+                color="white"
+                variant={selectedHabits.includes(index) ? "solid" : "outline"}
+                padding="10px"
+                margin="1rem"
+                _hover={{ bg: "#2D797B" }}
+                onClick={() => handleClick(index)}
+                whiteSpace="normal"
+              >
+                <Text fontSize="l">{habit.description}</Text>
+              </Button>
+            ))}
 
-        {customHabits.map((customHabit, index) => (
-          <Button
-            key={index}
-            width="100%"
-            height="auto"
-            borderRadius="10px"
-            colorScheme="teal"
-            color="white"
-            variant={selectedCustomHabits.includes(index) ? "solid" : "outline"}
-            padding="10px"
-            margin="1rem"
-            _hover={{ bg: "#2D797B" }}
-            onClick={() => handleCustomHabitsClick(index)}
-            whiteSpace="normal"
-          >
-            <Text fontSize="l">
-              {habits.length + index + 1}. {customHabit}
-            </Text>
-          </Button>
-        ))}
-      </Box>
-      <Button onClick={handleSubmit} colorScheme="teal" mt="1rem">
-        Submit Selected Habits
-      </Button>
+            {customHabits.map((customHabit, index) => (
+              <Button
+                key={index}
+                width="100%"
+                height="auto"
+                borderRadius="10px"
+                colorScheme="teal"
+                color="white"
+                variant={
+                  selectedCustomHabits.includes(index) ? "solid" : "outline"
+                }
+                padding="10px"
+                margin="1rem"
+                _hover={{ bg: "#2D797B" }}
+                onClick={() => handleCustomHabitsClick(index)}
+                whiteSpace="normal"
+              >
+                <Text fontSize="l">
+                  {habits.length + index + 1}. {customHabit}
+                </Text>
+              </Button>
+            ))}
+          </Box>
+          {habits.length > 0 && (
+            <Button onClick={handleSubmit} colorScheme="teal" mt="1rem">
+              Submit Selected Habits
+            </Button>
+          )}
+        </>
+      )}
     </Box>
   );
 };

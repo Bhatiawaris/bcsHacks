@@ -60,7 +60,7 @@ function PromptPage() {
       if (response.ok) {
         const data = await response.json();
         console.log("Selected habits submitted successfully!");
-        console.log("Processed Output:", data.output);
+        console.log("Processed Output:", data.output); //temporary solution
       } else {
         console.log("Failed to submit selected habits.");
       }
@@ -130,11 +130,13 @@ function PromptPage() {
         <Text fontSize="xl" fontWeight="bold" mb={4}>
           Your goal: {submittedGoal}
         </Text>
-        <HabitList
-          habits={processedOutput}
-          customHabits={customHabits}
-          onSubmitHabits={handleSubmitHabits}
-        />
+        {submittedGoal && (
+          <HabitList
+            habits={processedOutput}
+            customHabits={customHabits}
+            onSubmitHabits={handleSubmitHabits}
+          />
+        )}
       </Box>
     </Grid>
   );
