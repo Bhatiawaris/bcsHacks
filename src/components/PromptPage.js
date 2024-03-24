@@ -8,7 +8,7 @@ function PromptPage() {
   const [habit, setHabit] = useState("");
   const [habits, setHabits] = useState([]);
   const [customHabits, setCustomHabits] = useState([]);
-  const [processedOutput, setProcessedOutput] = useState("");
+  const [processedOutput, setProcessedOutput] = useState([]);
 
   const handleGoalChange = (event) => {
     setGoal(event.target.value);
@@ -44,6 +44,31 @@ function PromptPage() {
     setHabit("");
   };
 
+  const handleSubmitHabits = async (selectedHabits) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/processInput/habits",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ selectedHabits }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Selected habits submitted successfully!");
+        console.log("Processed Output:", data.output);
+      } else {
+        console.log("Failed to submit selected habits.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <Grid
       templateColumns="repeat(2, 1fr)"
@@ -52,6 +77,7 @@ function PromptPage() {
       color="white"
       p={5}
       minHeight="100vh"
+      maxWidth="100%"
     >
       <Box padding="20px">
         <Text fontSize="xl" fontWeight="bold" mb={4}>
@@ -77,8 +103,9 @@ function PromptPage() {
           2. Habit Builder generates habits that achieve this goal:
         </Text>
 
-        <Text mb={4}>
-          3. Choose up to 3 preferred habits or create your own
+        <Text mb={2}>
+          3. Choose up to 4 desired habits from the generated list or create
+          your own desired habit.
         </Text>
         <Flex justifyContent="left">
           <Input
@@ -91,18 +118,23 @@ function PromptPage() {
           <Button onClick={handleHabitSubmit} colorScheme="teal">
             Add Habit
           </Button>
+          <Box width="20px" />
         </Flex>
+        <Text mb={2}>
+          4. Habit Builder will create a detailed plan for your habit based on
+          the Atomic Habits template!
+        </Text>
       </Box>
 
       <Box backgroundColor="#253140" borderRadius="10px" padding="20px">
         <Text fontSize="xl" fontWeight="bold" mb={4}>
-          Your goal:
+          Your goal: {submittedGoal}
         </Text>
-        <Text fontSize="xl" fontWeight="bold">
-          {submittedGoal}
-        </Text>
-        <Text mb={2}>Processed Output: {processedOutput}</Text>
-        <HabitList habits={habits} customHabits={customHabits} />
+        <HabitList
+          habits={processedOutput}
+          customHabits={customHabits}
+          onSubmitHabits={handleSubmitHabits}
+        />
       </Box>
     </Grid>
   );
