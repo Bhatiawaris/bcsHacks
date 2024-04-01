@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+# Habit Builder - BCS Hacks 2024
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For BCS Hacks 2024, we developed an OpenAI web application that outlines detailed habit plans to help users reach their desired goals more effectively. Our project was inspired by the book "Atomic Habits" by James Clear, which lays out all the rules for changing habits in a straightforward way, along with the philosophies that make habit changes more effective. James Clear outlines four philosophies in his book: make the goal obvious, make it attractive (motivational), make it easy, and make it satisfying. With Habit Builder, users can enter a goal they wish to accomplish. Our application takes in the entered goal and returns ten possible habits that can help achieve this goal. Users can select up to four of these habits to create a more detailed plan following the Atomic Habits philosophy (obvious, attractive, easy, satisfying), enabling them to guide their goal progress.
 
-## Available Scripts
+## Learning 
 
-In the project directory, you can run:
+Overall, the project was an excellent opportunity for our team to learn how to build a full-stack web application from scratch. The greatest takeaway from this project was learning how to integrate AI (e.g., OpenAI) into web applications. It was our team's first time using the OpenAI API, and we learned how to format prompt data from our frontend to work best with OpenAI. We initially encountered challenges parsing our JSON prompts so that the output from the OpenAI API could be properly displayed on our frontend. However, we were able to overcome this challenge through manual testing methods and trial and error.
 
-### `npm start`
+## Technologies Used 💻 
+The frontend was made with React, using Chakra UI as a library. The backend was created with node.js and express as middleware for the OpenAI API. Postman was used for backend testing.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please refer to [our hackathon submission](https://devpost.com/software/habit-builder-q13hdc) to view a demo of our application, and instructions on how to set the application up.
